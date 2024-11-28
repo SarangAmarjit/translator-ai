@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../helper/ad_helper.dart';
 import '../helper/global.dart';
 import '../helper/pref.dart';
 import '../model/home_type.dart';
@@ -40,7 +39,10 @@ class _HomeScreenState extends State<HomeScreen> {
             _isDarkMode.value ? Colors.black.withOpacity(0.5) : Colors.white,
         //app bar
         appBar: AppBar(
-          title: const Text(appName),
+          title: const Text(
+            appName,
+            style: TextStyle(fontFamily: 'KulimPark'),
+          ),
 
           //
           actions: [

@@ -1,14 +1,16 @@
 import 'dart:developer';
 
 import 'package:ai_assistant/constant/const.dart';
-import 'package:ai_assistant/model/meeteimayek/mapper.dart';
 import 'package:ai_assistant/model/meeteimayek/phonememodel.dart';
 import 'package:ai_assistant/model/meeteimayek/phonemeoutput.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MeeteiMayekController extends GetxController {
-  String _outputresulttext = '';
-  String get outputresulttext => _outputresulttext;
+  final TextEditingController outputtextcontroller = TextEditingController();
+  void resetoutput() {
+    outputtextcontroller.clear();
+  }
 
   // Existing transliteration method (English to Meetei Mayek)
   String transliterate(String? text) {
@@ -117,9 +119,7 @@ class MeeteiMayekController extends GetxController {
       }
     }
 
-    _outputresulttext = output.join('');
-    log("Tranlated to Enlish result :$_outputresulttext");
-    return _outputresulttext;
+    return output.join('');
   }
 
   String _convertToMMCVC(List<Phoneme> phonemes) {
@@ -192,8 +192,8 @@ class MeeteiMayekController extends GetxController {
       }
     }
 
-    _outputresulttext = output.map((e) => e.getOutput()).join('');
-    update();
+    outputtextcontroller.text = output.map((e) => e.getOutput()).join('');
+
     return output.map((e) => e.getOutput()).join('');
   }
 }

@@ -1,15 +1,11 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:ai_assistant/controller/chat_controller.dart';
 import 'package:ai_assistant/controller/meeteimayekcontroler.dart';
-
 import 'package:ai_assistant/controller/speechservices.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
-import 'package:speech_to_text/speech_to_text.dart';
-import 'package:speech_to_text/speech_to_text.dart' as speechToText;
 
 import '../apis/apis.dart';
 import '../helper/my_dialog.dart';
@@ -22,7 +18,7 @@ class TranslateController extends GetxController {
   final textC = TextEditingController();
   final resultC = TextEditingController();
 
-  final from = ''.obs, to = 'English'.obs;
+  final from = 'Meiteilon (Manipuri)'.obs, to = 'English'.obs;
   final status = Status.none.obs;
 
   final SpeechService speechService = Get.find();
@@ -201,9 +197,6 @@ class TranslateController extends GetxController {
   }
 
   Future<void> googleTranslate() async {
-    if (meeteiMayekController.outputresulttext == 'ꯑꯗꯣꯝ ꯀꯅꯥꯅꯣ') {
-      log('correcccccteddd....');
-    }
     log("finall textc :${textC.text}");
     if (textC.text.trim().isNotEmpty && to.isNotEmpty) {
       status.value = Status.loading;

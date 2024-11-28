@@ -30,7 +30,7 @@ class HomeCard extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(20))),
         child: InkWell(
           borderRadius: const BorderRadius.all(Radius.circular(20)),
-          onTap: homeType.onTap,
+          onTap: homeType.onTap(isDarkMode),
           child: homeType.leftAlign
               ? Padding(
                   padding:

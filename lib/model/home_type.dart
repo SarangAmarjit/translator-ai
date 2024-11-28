@@ -41,14 +41,13 @@ extension MyHomeType on HomeType {
         HomeType.aiTranslator => EdgeInsets.zero,
         HomeType.meeteimayek => const EdgeInsets.all(17),
       };
-
-  //for navigation
-  VoidCallback get onTap {
+  VoidCallback onTap(RxBool isdark) {
     ChatController chatController = Get.put(ChatController());
+
     return switch (this) {
       HomeType.aiChatBot => () {
           chatController.setchatscreenbool(ischatscreenss: true);
-          Get.to(() => const ChatBotFeature());
+          Get.to(() => const ChatBotFeature()); // Pass the parameter here
         },
       HomeType.aiImage => () {
           Get.to(() => const ImageFeature());
@@ -59,7 +58,9 @@ extension MyHomeType on HomeType {
         },
       HomeType.meeteimayek => () {
           chatController.setchatscreenbool(ischatscreenss: false);
-          Get.to(() => const MeiteiMayekConverter());
+          Get.to(() => MeiteiMayekConverter(
+                isdarkmode: isdark,
+              ));
         },
     };
   }

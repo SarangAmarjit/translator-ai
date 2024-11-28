@@ -2,16 +2,11 @@ import 'package:ai_assistant/controller/meeteimayekcontroler.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MeiteiMayekConverter extends StatefulWidget {
-  const MeiteiMayekConverter({super.key});
+class MeiteiMayekConverter extends StatelessWidget {
+  final RxBool isdarkmode;
+  MeiteiMayekConverter({super.key, required this.isdarkmode});
 
-  @override
-  _MeiteiMayekConverterState createState() => _MeiteiMayekConverterState();
-}
-
-class _MeiteiMayekConverterState extends State<MeiteiMayekConverter> {
   final TextEditingController _controller = TextEditingController();
-  String _outputText = "";
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +37,7 @@ class _MeiteiMayekConverterState extends State<MeiteiMayekConverter> {
                   hintText: "Type here...",
                 ),
                 onChanged: (text) {
-                  setState(() {
-                    _outputText = mayekController.transliterate(text);
-                  });
+                  mayekController.transliterate(text);
                 },
               ),
               const SizedBox(height: 20),
@@ -53,25 +46,44 @@ class _MeiteiMayekConverterState extends State<MeiteiMayekConverter> {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 10),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(5),
+
+              TextField(
+                minLines: 5,
+                maxLines: null,
+                controller: mayekController.outputtextcontroller,
+                decoration: const InputDecoration(
+                  hintStyle:
+                      TextStyle(color: Color.fromARGB(255, 194, 193, 193)),
+                  border: OutlineInputBorder(),
+                  hintText: "Converted text will appear here...",
                 ),
-                child: Text(
-                  _outputText.isNotEmpty
-                      ? _outputText
-                      : "Converted text will appear here",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: 'MeiteiMayekFont',
-                      color: _outputText.isNotEmpty
-                          ? Colors.black
-                          : const Color.fromARGB(255, 194, 193, 193)),
-                ),
+                onChanged: (text) {
+                  mayekController.transliterate(text);
+                },
               ),
+              // Container(
+              //   width: MediaQuery.of(context).size.width,
+              //   padding: const EdgeInsets.all(12),
+              //   decoration: BoxDecoration(
+              //     border: Border.all(color: Colors.grey),
+              //     borderRadius: BorderRadius.circular(5),
+              //   ),
+              //   child: Obx(
+              //     () => Text(
+              //       mayekController.outputresulttext.value.isNotEmpty
+              //           ? mayekController.outputresulttext.value
+              //           : "Converted text will appear here",
+              //       style: TextStyle(
+              //           fontSize: 18,
+              //           fontFamily: 'MeiteiMayekFont',
+              //           color: mayekController.outputresulttext.value.isNotEmpty
+              //               ? isdarkmode.value
+              //                   ? Colors.white
+              //                   : Colors.black
+              //               : const Color.fromARGB(255, 194, 193, 193)),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),

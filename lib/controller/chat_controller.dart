@@ -1,8 +1,10 @@
 import 'dart:developer';
+
+import 'package:ai_assistant/controller/meeteimayekcontroler.dart';
 import 'package:ai_assistant/controller/speechservices.dart';
 import 'package:ai_assistant/controller/translate_controller.dart';
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 
 import '../apis/apis.dart';
@@ -43,6 +45,7 @@ class ChatController extends GetxController {
   final SpeechService speechService = Get.find();
   void setchatscreenbool({required bool ischatscreenss}) {
     ischatscreen.value = ischatscreenss;
+    MeeteiMayekController().resetoutput();
   }
 
   void listen({required FlutterTts flutterTts}) async {
