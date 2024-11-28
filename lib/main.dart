@@ -12,18 +12,12 @@ import 'helper/global.dart';
 import 'helper/pref.dart';
 import 'screen/splash_screen.dart';
 
-
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // init hive
   await Pref.initialize();
 
-  // for app write initialization
-  // AppWrite.init();
-
-  // for initializing facebook ads sdk
   AdHelper.init();
 
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
