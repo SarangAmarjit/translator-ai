@@ -135,9 +135,9 @@ class TranslateController extends GetxController {
           from: jsonLang[from.value] ?? 'auto',
           to: jsonLang[to.value] ?? 'en',
           text: textC.text);
-
-      String meetoeng =
-          meeteiMayekController.reverseTransliterate(resultC.text);
+      String meetoeng = to.value == 'Meiteilon (Manipuri)'
+          ? meeteiMayekController.reverseTransliterate(resultC.text)
+          : '';
 
       // // Regular expression to match Devanagari characters
       // RegExp hindiRegex = RegExp(r'[\u0900-\u097F]+');
